@@ -172,4 +172,19 @@ local render = function(bufnr)
 	end
 end
 
+M.setup = function(opts)
+	config = vim.tbl_deep_extend("force", defaults, opts or {})
+
+	defineHighlights()
+
+	vim.api.nvim_create_autocmd(
+		{ "BufEnter", "TextChanged", "TextChangedI", "CursorMoved" },
+		{
+			callback = function(args)
+				render(args.buf)
+			end
+		}
+	)
+end
+
 return M
