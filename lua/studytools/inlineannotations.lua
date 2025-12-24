@@ -87,4 +87,80 @@ local clear = function(bufnr)
 	vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1)
 end
 
+local annotateLine = function(bufnr, lnum, line)
+	for kind, pattern in pairs(patterns) do
+		local s, e, customText = line:find(pattern)
+
+		if s then
+			if kind == "important" then
+				vim.api.nvim_buf_set_extmark(bufnr, ns, lnum, 0, {
+					line_hl_group = highlights.important_line,
+					virt_text = {
+						{ config.icons.important, highlights.important_icon }
+					},
+					virt_text_pos = "eol",
+				})
+			elseif kind == "question" then
+				vim.api.nvim_buf_set_extmark(bufnr, ns, lnum, 0, {
+					line_hl_group = highlights.question_line,
+					virt_text = {
+						{ config.icons.question, highlights.question_icon }
+					},
+					virt_text_pos = "eol",
+				})
+			elseif kind == "study" then
+				vim.api.nvim_buf_set_extmark(bufnr, ns, lnum, 0, {
+					line_hl_group = highlights.study_line,
+					virt_text = {
+						{ config.icons.study, highlights.study_icon }
+					},
+					virt_text_pos = "eol",
+				})
+			elseif kind == "definition" then
+				vim.api.nvim_buf_set_extmark(bufnr, ns, lnum, 0, {
+					line_hl_group = highlights.definition_line,
+					virt_text = {
+						{ config.icons.definition, highlights.definition_icon }
+					},
+					virt_text_pos = "eol",
+				})
+			elseif kind == "example" then
+				vim.api.nvim_buf_set_extmark(bufnr, ns, lnum, 0, {
+					line_hl_group = highlights.example_line,
+					virt_text = {
+						{ config.icons.example, highlights.example_icon }
+					},
+					virt_text_pos = "eol",
+				})
+			elseif kind == "review" then
+				vim.api.nvim_buf_set_extmark(bufnr, ns, lnum, 0, {
+					line_hl_group = highlights.review_line,
+					virt_text = {
+						{ config.icons.review, highlights.review_icon }
+					},
+					virt_text_pos = "eol",
+				})
+			elseif kind == "memorise" then
+				vim.api.nvim_buf_set_extmark(bufnr, ns, lnum, 0, {
+					line_hl_group = highlights.memorise_line,
+					virt_text = {
+						{ config.icons.memorise, highlights.memorise_icon }
+					},
+					virt_text_pos = "eol",
+				})
+			elseif kind == "custom" then
+				vim.api.nvim_buf_set_extmark(bufnr, ns, lnum, 0, {
+				  line_hl_group = highlights.custom_line,
+				  virt_text = {
+					{ "  " .. customText, highlights.custom_text },
+				  },
+				  virt_text_pos = "eol",
+				})
+			end
+
+			return
+		end
+	end
+end
+
 return M
