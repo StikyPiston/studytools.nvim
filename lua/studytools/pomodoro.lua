@@ -20,7 +20,7 @@ local stopTimer = function()
 	end
 end
 
-local startPhase = function(durationMinutes, nextState, nextDuration)
+startPhase = function(durationMinutes, nextState, nextDuration)
 	stopTimer()
 
 	timer = vim.loop.new_timer()
