@@ -87,28 +87,9 @@ local clear = function(bufnr)
 	vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1)
 end
 
-local cursorOnRange = function(lnum, startCol, endCol)
-  local cur = vim.api.nvim_win_get_cursor(0)
-  if cur[1] - 1 ~= lnum then
-    return false
-  end
-  return cur[2] >= startCol and cur[2] <= endCol
-end
-
 local annotateLine = function(bufnr, lnum, line)
 	for kind, pattern in pairs(patterns) do
 		local s, e, customText = line:find(pattern)
-		
-		local startCol = s - 1
-		local endCol = e
-		local reveal = cursorOnRange(lnum, startCol, endCol)
-
-		if not reveal then
-		  vim.api.nvim_buf_set_extmark(bufnr, ns, lnum, startCol, {
-			end_col = endCol,
-			conceal = "",
-		  })
-		end
 
 		if s then
 			if kind == "important" then
