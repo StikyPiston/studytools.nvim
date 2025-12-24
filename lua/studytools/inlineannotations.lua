@@ -163,4 +163,13 @@ local annotateLine = function(bufnr, lnum, line)
 	end
 end
 
+local render = function(bufnr)
+	clear(bufnr)
+
+	local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
+	for i, line in ipairs(lines) do
+		annotateLine(bufnr, i - 1, line)
+	end
+end
+
 return M
