@@ -68,7 +68,7 @@ local defineHighlights = function()
 	hl(0, highlights.study_icon,      { fg = "#04a5e5" })
 
 	hl(0, highlights.definition_line, { bg = "#8839ef" })
-	hl(0, highligths.definition_icon, { fg = "#ea76cb" })
+	hl(0, highlights.definition_icon, { fg = "#ea76cb" })
 
 	hl(0, highlights.example_line,    { bg = "#40a02b" })
 	hl(0, highlights.example_icon,    { fg = "#50b03c" })
