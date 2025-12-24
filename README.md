@@ -6,4 +6,4 @@
 
 | Utility | Description | Setup | Documentation |
 | ------- | ----------- | ----- | ------------- |
-| studytools.inlineannotations | Adds coloured annotations to notes | `require("studytools.inlineannotations")` | [[docs/inlineannotations]] |
+| studytools.inlineannotations | Adds coloured annotations to notes | `require("studytools.inlineannotations")` | [Docs](docs/inlineannotations) |
