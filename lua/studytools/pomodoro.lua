@@ -69,7 +69,8 @@ M.setup = function()
 		"StudytoolsPomodoro",
 		function(opts)
 			M.start(opts.fargs[1], opts.fargs[2])
-		end
+		end,
+		{}
 	)
 
 	vim.api.nvim_create_user_command(
