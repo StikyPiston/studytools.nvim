@@ -7,3 +7,4 @@
 | Utility | Description | Setup | Documentation |
 | ------- | ----------- | ----- | ------------- |
 | studytools.inlineannotations | Adds coloured annotations to notes | `require("studytools.inlineannotations")` | [Docs](docs/inlineannotations.md) |
+| studytools.pomodoro | A simple pomodoro timer | `require("studytools.pomodoro").setup()` | [Docs](docs/pomodoro.md) |
