@@ -70,7 +70,7 @@ M.setup = function()
 		function(opts)
 			M.start(opts.fargs[1], opts.fargs[2])
 		end,
-		{}
+		{ nargs = "*" }
 	)
 
 	vim.api.nvim_create_user_command(
