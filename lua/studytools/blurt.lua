@@ -40,6 +40,7 @@ M.start = function()
     vim.cmd("tabnew")
 
     local blurt_buf = vim.api.nvim_get_current_buf()
+	vim.api.nvim_buf_set_name(blurt_buf, "studytools://blurt")
 
     -- Configure blurt buffer
     vim.bo.buftype = "acwrite"
