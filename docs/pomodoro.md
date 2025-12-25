@@ -1,5 +1,7 @@
 # studytools.pomodoro
 
+![Pomodoro in action](assets/pomodoro.png)
+
 **Pomodoro** adds a simple pomodoro timer that can be invoked with commands!
 
 ## Usage

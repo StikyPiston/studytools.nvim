@@ -1,5 +1,7 @@
 # studytools.inlineannotations
 
+![Inlineannotations in action](assets/inlineannotations.png)
+
 **Inlineannotations** provides inline annotations to enhance your notes in
 Neovim (or code comments, anything really!)
 

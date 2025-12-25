@@ -1,5 +1,7 @@
 # studytools.blurt
 
+![Blurt in action](assets/blurt.png)
+
 **Blurt** adds functionality to help you use the *blurting* study method in Neovim
 
 ## Usage
