@@ -77,4 +77,12 @@ M.start = function()
     })
 end
 
+M.setup = function()
+	vim.api.nviM_create_user_command(
+		'StudytoolsBlurt',
+		M.start(),
+		{}
+	)
+end
+
 return M
