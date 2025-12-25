@@ -31,6 +31,8 @@ local open_diff = function(original_lines, blurt_lines)
     local blurt_buf = scratch_buf(blurt_lines, "markdown", true)
     vim.api.nvim_win_set_buf(0, blurt_buf)
     vim.cmd("diffthis")
+
+	vim.api.nvim_buf_delete(blurt_buf, { force = true })
 end
 
 M.start = function()
