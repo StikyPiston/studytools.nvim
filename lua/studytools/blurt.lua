@@ -78,9 +78,9 @@ M.start = function()
 end
 
 M.setup = function()
-	vim.api.nviM_create_user_command(
+	vim.api.nvim_create_user_command(
 		'StudytoolsBlurt',
-		M.start(),
+		function() require("studytools.blurt").start() end,
 		{}
 	)
 end
