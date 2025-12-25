@@ -8,3 +8,4 @@
 | ------- | ----------- | ----- | ------------- |
 | studytools.inlineannotations | Adds coloured annotations to notes | `require("studytools.inlineannotations")` | [Docs](docs/inlineannotations.md) |
 | studytools.pomodoro | A simple pomodoro timer | `require("studytools.pomodoro").setup()` | [Docs](docs/pomodoro.md) |
+| studytools.blurt | Adds a simple command to help you with the blurting study method | `require("studytools.blurt").setup()` | [Docs](docs/blurt.md) |
