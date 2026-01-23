@@ -1,6 +1,7 @@
 local M = {}
 
 local ns = vim.api.nvim_create_namespace("studytools_inlineannotations")
+local diag_ns = vim.api.nvim_create_namespace("studytools_inlineannotations_diag")
 
 local defaults = {
 	icons = {
@@ -85,6 +86,30 @@ end
 
 local clear = function(bufnr)
 	vim.api.nvim_buf_clear_namespace(bufnr, ns, 0, -1)
+	vim.diagnostic.reset(diag_ns, bufnr)
+end
+
+local addDiagnostic = function(bufnr, lnum, kind)
+  local severity_map = {
+    important  = vim.diagnostic.severity.ERROR,
+    question   = vim.diagnostic.severity.WARN,
+    study      = vim.diagnostic.severity.INFO,
+    review     = vim.diagnostic.severity.HINT,
+    memorise   = vim.diagnostic.severity.HINT,
+    definition = vim.diagnostic.severity.INFO,
+    example    = vim.diagnostic.severity.INFO,
+  }
+
+  vim.diagnostic.set(diag_ns, bufnr, {
+    {
+      lnum     = lnum,
+      col      = 0,
+      end_col  = 0,
+      severity = severity_map[kind] or vim.diagnostic.severity.INFO,
+      message  = ("Study annotation: " .. kind),
+      source   = "studytools",
+    },
+  }, { underline = false, virtual_text = false })
 end
 
 local annotateLine = function(bufnr, lnum, line)
@@ -157,6 +182,8 @@ local annotateLine = function(bufnr, lnum, line)
 				  virt_text_pos = "eol",
 				})
 			end
+
+			addDiagnostic(bufnr, lnum, kind)
 
 			return
 		end
