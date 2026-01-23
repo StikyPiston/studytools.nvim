@@ -113,7 +113,7 @@ local addDiagnostic = function(bufnr, lnum, kind)
     col      = 0,
     end_col  = 0,
     severity = severity_map[kind] or vim.diagnostic.severity.INFO,
-    message  = "studytools inline annotation: " .. kind,
+    message  = kind,
     source   = "studytools",
   })
 end
