@@ -1,7 +1,8 @@
 local M = {}
 
-local ns = vim.api.nvim_create_namespace("studytools_inlineannotations")
-local diag_ns = vim.api.nvim_create_namespace("studytools_inlineannotations_diag")
+local ns          = vim.api.nvim_create_namespace("studytools_inlineannotations")
+local diag_ns     = vim.api.nvim_create_namespace("studytools_inlineannotations_diag")
+local diagnostics = {}
 
 local defaults = {
 	icons = {
@@ -89,28 +90,34 @@ local clear = function(bufnr)
 	vim.diagnostic.reset(diag_ns, bufnr)
 end
 
-local addDiagnostic = function(bufnr, lnum, kind)
+local resetDiagnostics = function(bufnr)
+  diagnostics[bufnr] = {}
+end
+
+local function add_diagnostic(bufnr, lnum, kind, text)
+  diagnostics[bufnr] = diagnostics[bufnr] or {}
+
   local severity_map = {
     important  = vim.diagnostic.severity.ERROR,
     question   = vim.diagnostic.severity.WARN,
     study      = vim.diagnostic.severity.INFO,
-    review     = vim.diagnostic.severity.HINT,
-    memorise   = vim.diagnostic.severity.HINT,
     definition = vim.diagnostic.severity.INFO,
     example    = vim.diagnostic.severity.INFO,
+    review     = vim.diagnostic.severity.HINT,
+    memorise   = vim.diagnostic.severity.HINT,
+    custom     = vim.diagnostic.severity.HINT,
   }
 
-  vim.diagnostic.set(diag_ns, bufnr, {
-    {
-      lnum     = lnum,
-      col      = 0,
-      end_col  = 0,
-      severity = severity_map[kind] or vim.diagnostic.severity.INFO,
-      message  = ("Study annotation: " .. kind),
-      source   = "studytools",
-    },
-  }, { underline = false, virtual_text = false })
+  table.insert(diagnostics[bufnr], {
+    lnum     = lnum,
+    col      = 0,
+    end_col  = 0,
+    severity = severity_map[kind] or vim.diagnostic.severity.INFO,
+    message  = "studytools inline annotation: " .. kind,
+    source   = "studytools",
+  })
 end
+
 
 local annotateLine = function(bufnr, lnum, line)
 	for kind, pattern in pairs(patterns) do
@@ -183,7 +190,6 @@ local annotateLine = function(bufnr, lnum, line)
 				})
 			end
 
-			addDiagnostic(bufnr, lnum, kind)
 
 			return
 		end
@@ -193,10 +199,18 @@ end
 local render = function(bufnr)
 	clear(bufnr)
 
+	vim.diagnostic.reset(diag_ns, bufnr)
+	resetDiagnostics(bufnr)
+
 	local lines = vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)
 	for i, line in ipairs(lines) do
 		annotateLine(bufnr, i - 1, line)
 	end
+
+	vim.diagnostic.set(diag_ns, bufnr, diagnostics[bufnr], {
+		virtual_text = false,
+		underline = false,
+	})
 end
 
 M.setup = function(opts)
