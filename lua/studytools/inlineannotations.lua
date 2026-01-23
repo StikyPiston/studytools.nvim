@@ -94,7 +94,7 @@ local resetDiagnostics = function(bufnr)
   diagnostics[bufnr] = {}
 end
 
-local function add_diagnostic(bufnr, lnum, kind, text)
+local addDiagnostic = function(bufnr, lnum, kind)
   diagnostics[bufnr] = diagnostics[bufnr] or {}
 
   local severity_map = {
@@ -190,6 +190,7 @@ local annotateLine = function(bufnr, lnum, line)
 				})
 			end
 
+			addDiagnostic(bufnr, lnum, kind)
 
 			return
 		end
