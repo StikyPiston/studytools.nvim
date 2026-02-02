@@ -1,7 +1,5 @@
 local M = {}
 
-local ns = vim.api.nvim_create_namespace("studytools_blurt")
-
 -- Create a scratch buffer with given lines
 local scratch_buf = function(lines, filetype, readonly)
     local buf = vim.api.nvim_create_buf(false, true)
