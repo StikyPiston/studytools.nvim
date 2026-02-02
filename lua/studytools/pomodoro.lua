@@ -21,7 +21,7 @@ local stopTimer = function()
 	end
 end
 
-startPhase = function(durationMinutes, nextState, nextDuration)
+StartPhase = function(durationMinutes, nextState, nextDuration)
 	stopTimer()
 
 	local durationSeconds = durationMinutes * 60
@@ -38,7 +38,7 @@ startPhase = function(durationMinutes, nextState, nextDuration)
 			else
 				notify("Break time! (" .. nextDuration .. " mins)")
 			end
-			startPhase(nextDuration, state == "work" and "break" or "work", durationMinutes)
+			StartPhase(nextDuration, state == "work" and "break" or "work", durationMinutes)
 		end)
 	)
 end
@@ -59,7 +59,7 @@ M.start = function(workMinutes, breakMinutes)
 
 	state = "work"
 	notify("Work session started: (" .. workMinutes .. " mins)")
-	startPhase(workMinutes, "break", breakMinutes)
+	StartPhase(workMinutes, "break", breakMinutes)
 end
 
 M.stop = function()
