@@ -104,7 +104,7 @@ M.setup = function()
 		M.stop,
 		{}
 	)
-	
+
 	vim.api.nvim_create_user_command(
 		"StudytoolsPomodoroStatus",
 		M.status,
