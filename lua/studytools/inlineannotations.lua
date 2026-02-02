@@ -122,7 +122,7 @@ end
 local annotateLine = function(bufnr, lnum, line)
 	for kind, pattern in pairs(patterns) do
 		local s, e, customText = line:find(pattern)
-		e = e
+		e = e + 1
 
 		if s then
 			if kind == "important" then
