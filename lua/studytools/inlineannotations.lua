@@ -122,7 +122,6 @@ end
 local annotateLine = function(bufnr, lnum, line)
 	for kind, pattern in pairs(patterns) do
 		local s, e, customText = line:find(pattern)
-		e = e + 1 -- TODO: Do something with this variable to get rid of warning
 
 		if s then
 			if kind == "important" then
